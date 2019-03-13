@@ -84,14 +84,6 @@ function search() {
   }
 }
 
-// funzione che mostra la conversazione del contatto cliccato
-function chatUserClick() {
-
-
-
-}
-
-
 
 function init() {
 
@@ -101,22 +93,33 @@ function init() {
   input.keyup(search);
 
 
-// funzione che apre il menu a tendina
-  $(document).on('click', '.message_options', function() {
+  // funzione che apre il menu a tendina
+    $(document).on('click', '.message_options', function() {
 
-    var me = $(this);
-    me.siblings(".message_options_menu").toggle();
+      var me = $(this);
+      me.parent().find(".message_options_menu").toggle();
 
-    // $(".message_options").click(function(){
-    //   $(".message_options_menu").toggle();
-    // });
-  });
-// funzione cancella messaggio
-  $(document).on('click', '.message_delete', function() {
+      // $(".message_options").click(function(){
+      //   $(".message_options_menu").toggle();
+      // });
+    });
 
-    var messageParent = $(this).parent().parent();
-    messageParent.hide();
-  });
+
+  // funzione cancella messaggio
+    $(document).on('click', '.message_delete', function() {
+
+      var messageParent = $(this).parent().parent();
+      messageParent.hide();
+    });
+
+
+  // funzione che mostra la conversazione del contatto cliccato
+    $(".wrapper_left_chat_user").click(function() {
+
+      $(".wrapper_right_msg").addClass("visible");
+
+    })
+
 
 }
 
