@@ -3,13 +3,15 @@
   padding: 0;
   box-sizing: border-box;
   font-family: Lato;
+  /* color: #4b4b4b; */
 }
 
 .container_header {
   position: fixed;
   height: 20vh;
   width: 100vw;
-  background: #358675;
+  /* background: #358675; */
+  background: #469488;  /* il 2° */
 }
 
 .container {
@@ -19,9 +21,9 @@
 
   height: 100vh;
   width: 100vw;
-  background: black;
 
-  background: #D2D3C9;
+  /* background: #D2D3C9; */
+  background: #D9DAD5; /* il 2° */
 }
 
 
@@ -65,6 +67,9 @@
   height: calc(100% - (100px + 90px));
   background-image: url("img/msg-background.jpg");
   overflow-y: scroll;
+  /* background-image: url("img/back-opening.png"); */
+  /* background-size: cover; */
+  /* background-position: center center; */
 }
 
 .wrapper_right_footer {
@@ -80,6 +85,7 @@
 .right_footer_icon > .fa, .right_footer_icon > .far {
   color: #6B7376;
   font-size: 24px;
+  cursor: pointer;
 }
 
 .wrapper_right_footer > input {
@@ -142,7 +148,10 @@
   margin-right: 10px;
   position: absolute;
   padding-left: 30px;
-  /* text-align: center; */
+}
+
+input:focus {
+ outline: none;
 }
 
 .fa-search {
@@ -156,6 +165,7 @@
   color: #6B7376;
   font-size: 22px;
   padding-left: 20px;
+  cursor: pointer;
 }
 
 .img_chat {
@@ -171,7 +181,12 @@
   height: 80px;
   display: flex;
   border-bottom: 1px solid #c3c3c3;
+  cursor: pointer;
   /* border: 1px solid red; */
+}
+
+.wrapper_left_chat_user:hover {
+  background: #f4f5f5;
 }
 
 .chat_user_img, .chat_user_hour {
@@ -235,6 +250,7 @@
   font-size: 22px;
   padding: 10px;
   margin-top: 10px;
+  cursor: pointer;
 }
 
 .left_chat_disclaimer_logo {
@@ -269,7 +285,6 @@
   margin-left: 5%;
   margin-top: 30px;
   position: relative;
-
  }
 
 .message.received {
@@ -282,25 +297,58 @@
   margin-left: 55%;
   margin-top: 20px;
   position: relative;
+
 }
 
 .message > span {
   font-size: 12px;
   position: absolute;
-  bottom: 5px;
-  right: 10px;
+  bottom: 8px;
+  right: 15px;
   color: #6B7376;
 }
 
 .fa-angle-down {
   color: #6B7376;
   position: absolute;
-  top: 5px;
-  right: 10px;
+  top: 8px;
+  right: 15px;
+  cursor: pointer;
+  display: none;
+  font-size: 18px;
 }
 
+.message:hover .fa-angle-down {
+  display: block;
+}
+
+.message_options_menu {
+  background: #fff;
+  box-shadow: 0px 0px 40px -15px rgba(0,0,0,0.75);
+  position: absolute;
+  right: 0;
+  width: 190px;
+  height: 100px;
+  border-radius: 10px;
+}
+
+.message_info, .message_delete {
+  cursor: pointer;
+	width: 100%;
+	height: 50%;
+  line-height: 50px;
+	font-size: 16px;
+	text-align: right;
+  padding-right: 20px;
+  color: #B6B9BB;
+}
+
+.message_info:hover, .message_delete:hover {
+	color: #4b4b4b;
+  background: #f4f5f5;
+  border-radius: 10px;
+}
 
 .hidden {
   display: none;
-
 }

@@ -28,7 +28,7 @@ function addNewMessage() {
 
       // al trascorrere del timeout lancio la funzione autoReply
       // e cancello i valori dall'input
-      setTimeout(autoReply, 2000);
+      setTimeout(autoReply, 1000);
       $(".new-message-inputs").val("");
     }
   })
@@ -50,7 +50,7 @@ function autoReply() {
   $(messageOptions).addClass("fas fa-angle-down");
 
 
-  $(messageContent).text("Messaggio ricevuto correttamente");
+  $(messageContent).text("OK");
   $(messageDetail).text(date.getHours() + ":" + date.getMinutes());
 
   message.append(messageContent);
@@ -73,6 +73,7 @@ function search() {
   for (var i = 0; i < list.length; i++) {
 
     var contact = list.eq(i);
+    console.log(contact);
     var name = contact.find("h3");
     var listContent = name.text().toLowerCase();
 
@@ -83,19 +84,44 @@ function search() {
   }
 }
 
+// funzione che mostra la conversazione del contatto cliccato
+function chatUserClick() {
+
+
+
+}
+
 
 
 function init() {
+
   addNewMessage();
 
   var input =$("#chat_input");
   input.keyup(search);
+
+
+// funzione che apre il menu a tendina
+  $(document).on('click', '.message_options', function() {
+
+    var me = $(this);
+    me.siblings(".message_options_menu").toggle();
+
+    // $(".message_options").click(function(){
+    //   $(".message_options_menu").toggle();
+    // });
+  });
+// funzione cancella messaggio
+  $(document).on('click', '.message_delete', function() {
+
+    var messageParent = $(this).parent().parent();
+    messageParent.hide();
+  });
+
 }
 
+
 $(document).ready(init);
-
-
-
 
 
 
