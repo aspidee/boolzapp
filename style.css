@@ -65,7 +65,7 @@
   width: 100%;
   height: calc(100% - (100px + 90px));
   overflow-y: scroll;
-  display: none;
+  /* display: none; */
   background-image: url("img/msg-background.jpg");
 }
 
@@ -296,6 +296,12 @@ input:focus {
   margin-left: 55%;
   margin-top: 20px;
   position: relative;
+}
+
+.message > p {
+  overflow-wrap: break-word;
+  word-break: break-all; 
+  hyphens: auto;
 }
 
 .message > span {

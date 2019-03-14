@@ -10,20 +10,33 @@ function addNewMessage() {
       var messageContent = document.createElement("p");
       var messageDetail = document.createElement("span");
       var messageOptions = document.createElement("i");
+      var messageOptions1 = document.createElement("div");
+      var messageOptions2 = document.createElement("div");
+      var messageOptions3 = document.createElement("div");
 
       $(message).addClass("message");
       $(message).addClass("received");
-      $(messageOptions).addClass("fas fa-angle-down");
+      $(messageOptions).addClass("fas fa-angle-down message_options");
+      $(messageOptions1).addClass("message_options_menu hidden");
+      $(messageOptions2).addClass("message_info");
+      $(messageOptions3).addClass("message_delete");
+
 
       newMessageContent = $(".new-message-inputs").val();
       console.log(newMessageContent);
 
       $(messageContent).text(newMessageContent);
+      $(messageOptions2).text("Info messaggio");
+      $(messageOptions3).text("Cancella messaggio");
       $(messageDetail).text(date.getHours() + ":" + date.getMinutes());
 
       message.append(messageContent);
       message.append(messageDetail);
       message.append(messageOptions);
+      message.append(messageOptions1);
+      messageOptions1.append(messageOptions2);
+      messageOptions1.append(messageOptions3);
+
       wrapper.append(message);
 
       // al trascorrere del timeout lancio la funzione autoReply
@@ -44,18 +57,31 @@ function autoReply() {
   var messageContent = document.createElement("p");
   var messageDetail = document.createElement("span");
   var messageOptions = document.createElement("i");
+  var messageOptions1 = document.createElement("div");
+  var messageOptions2 = document.createElement("div");
+  var messageOptions3 = document.createElement("div");
+
 
   $(message).addClass("message");
   $(message).addClass("sent");
-  $(messageOptions).addClass("fas fa-angle-down");
+  $(messageOptions).addClass("fas fa-angle-down message_options");
+  $(messageOptions1).addClass("message_options_menu hidden");
+  $(messageOptions2).addClass("message_info");
+  $(messageOptions3).addClass("message_delete");
 
 
   $(messageContent).text("OK");
+  $(messageOptions2).text("Info messaggio");
+  $(messageOptions3).text("Cancella messaggio");
   $(messageDetail).text(date.getHours() + ":" + date.getMinutes());
 
   message.append(messageContent);
   message.append(messageDetail);
   message.append(messageOptions);
+  message.append(messageOptions1);
+  messageOptions1.append(messageOptions2);
+  messageOptions1.append(messageOptions3);
+
   wrapper.append(message);
 }
 
@@ -84,41 +110,67 @@ function search() {
   }
 }
 
+// funzione che apre il menu a tendina
+function menuDropdownOn() {
+
+  // $(".message_options").click(function(){
+  //   $(".message_options_menu").toggle();
+  // });
+  var me = $(this);
+  me.parent().find(".message_options_menu").toggle();
+}
+
+// funzione che nasconde il menu al passaggio del mouse
+function menuDropdownOff() {
+
+  var me = $(this);
+  me.parent().find(".message_options_menu").hide();
+}
+
+// funzione che cancella un messaggio
+function deleteMessage() {
+
+  var me = $(this);
+  var message = me.closest(".message");
+  message.remove();
+}
+
+// funzione che mostra la conversazione del contatto cliccato
+function chatShow() {
+
+  var wrapper = $(".wrapper_right_msg");
+  var index = $(this).index();
+
+  wrapper.addClass("hidden");
+  wrapper.eq(index).removeClass("hidden");
+
+}
+
+
 
 function init() {
 
   addNewMessage();
 
-  var input =$("#chat_input");
+  var input = $("#chat_input");
   input.keyup(search);
 
 
-  // funzione che apre il menu a tendina
-    $(document).on('click', '.message_options', function() {
 
-      var me = $(this);
-      me.parent().find(".message_options_menu").toggle();
+  var doc = $(document);
 
-      // $(".message_options").click(function(){
-      //   $(".message_options_menu").toggle();
-      // });
-    });
+  // doc.on('click', 'wrapper_left_chat_user', chatShow)
+  doc.on('click', '.message_options', menuDropdownOn);
+  doc.on('mouseleave', '.message', menuDropdownOff);
+  doc.on('click', '.message_delete', deleteMessage);
 
 
-  // funzione cancella messaggio
-    $(document).on('click', '.message_delete', function() {
+//perchè non si può spostare???
+  $(".wrapper_left_chat_user").click(function() {
 
-      var messageParent = $(this).parent().parent();
-      messageParent.hide();
-    });
+    $(".wrapper_right_msg").addClass("visible");
 
-
-  // funzione che mostra la conversazione del contatto cliccato
-    $(".wrapper_left_chat_user").click(function() {
-
-      $(".wrapper_right_msg").addClass("visible");
-
-    })
+  });
 
 
 }
