@@ -128,8 +128,6 @@ function menuDropdownOn() {
 
   var me = $(this);
   me.parent().find(".message_options_menu").toggle("fast");
-  $(".message_options_menu").animate({scrollTop: $(".message_options_menu").prop("scrollHeight")}, 0);
-
 
   // $(".message_options").click(function(){
     //   $(".message_options_menu").toggle();
