@@ -1,10 +1,11 @@
 // funzione che aggiunge un nuovo messaggio
 function addNewMessage() {
+
   $(".new-message-inputs").keyup(function(e) {
 
     if (e.which == 13) {
 
-      var wrapper = $(".wrapper_right_msg");
+      var wrapper = $(".wrapper_right_msg.visible");
       var date = new Date();
       var message = document.createElement("div");
       var messageContent = document.createElement("p");
@@ -51,7 +52,7 @@ function addNewMessage() {
 // all'inserimento di un nuovo messaggio
 function autoReply() {
 
-  var wrapper = $(".wrapper_right_msg");
+  var wrapper = $(".wrapper_right_msg.visible");
   var date = new Date();
   var message = document.createElement("div");
   var messageContent = document.createElement("p");
@@ -113,11 +114,12 @@ function search() {
 // funzione che apre il menu a tendina
 function menuDropdownOn() {
 
-  // $(".message_options").click(function(){
-  //   $(".message_options_menu").toggle();
-  // });
   var me = $(this);
   me.parent().find(".message_options_menu").toggle();
+
+  // $(".message_options").click(function(){
+    //   $(".message_options_menu").toggle();
+    // });
 }
 
 // funzione che nasconde il menu al passaggio del mouse
@@ -134,16 +136,36 @@ function deleteMessage() {
   var message = me.closest(".message");
   message.remove();
 }
+// funzione che aggiorna il nome del contanitore della propria chat
+function nameUpdate() {
+
+  var me = $(this);
+  var name = me.find(".chat_user_message h3").text();
+
+  $(".contact_name").text(name);
+  console.log(name);
+}
+
 
 // funzione che mostra la conversazione del contatto cliccato
-function chatShow() {
+// attivo la classe active al contatto selezionato
+function userActiveClass() {
 
-  var wrapper = $(".wrapper_right_msg");
-  var index = $(this).index();
+  var old = $(".wrapper_left_chat_user.active");
+  old.removeClass("active");
+  var me = $(this);
+  me.addClass("active");
+}
+// mostro il contenitore dei messaggi del contatto selezionato
+function msgUserChat() {
 
-  wrapper.addClass("hidden");
-  wrapper.eq(index).removeClass("hidden");
+  var me = $(this);
+  var indBox = me.index();
 
+  var boxes = $(".wrapper_right_msg");
+  boxes.removeClass("visible");
+  var boxSelected = boxes.eq(indBox);
+  boxSelected.addClass("visible");
 }
 
 
@@ -156,25 +178,16 @@ function init() {
   input.keyup(search);
 
 
-
   var doc = $(document);
 
-  // doc.on('click', 'wrapper_left_chat_user', chatShow)
   doc.on('click', '.message_options', menuDropdownOn);
   doc.on('mouseleave', '.message', menuDropdownOff);
   doc.on('click', '.message_delete', deleteMessage);
-
-
-//perchè non si può spostare???
-  $(".wrapper_left_chat_user").click(function() {
-
-    $(".wrapper_right_msg").addClass("visible");
-
-  });
-
+  doc.on('click', '.wrapper_left_chat_user', userActiveClass);
+  doc.on('click', '.wrapper_left_chat_user', msgUserChat);
+  doc.on('click', '.wrapper_left_chat_user', nameUpdate);
 
 }
-
 
 $(document).ready(init);
 
