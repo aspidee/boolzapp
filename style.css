@@ -280,7 +280,8 @@ input:focus {
   padding: 20px;
   width: 40%;
   margin-left: 5%;
-  margin-top: 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   position: relative;
  }
 
@@ -293,6 +294,7 @@ input:focus {
   width: 40%;
   margin-left: 55%;
   margin-top: 20px;
+  margin-bottom: 20px;
   position: relative;
 }
 

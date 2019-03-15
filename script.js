@@ -40,9 +40,19 @@ function addNewMessage() {
 
       wrapper.append(message);
 
+      wrapper.animate({scrollTop: wrapper.prop("scrollHeight")}, 0);
+      // avvio lo scroll all'autoreply
+      // wrapper.animate({scrollTop: 0 }, 0);
+
       // al trascorrere del timeout lancio la funzione autoReply
       // e cancello i valori dall'input
-      setTimeout(autoReply, 1000);
+      setTimeout(function(){
+        // passando l'argomento wrapper alla funzione
+        // anonima autoReply il messaggio automatico
+        // appare solo nella conversazione selezionata
+        autoReply(wrapper);
+      }, 1000);
+
       $(".new-message-inputs").val("");
     }
   })
@@ -50,9 +60,9 @@ function addNewMessage() {
 
 // funzione che restituisce una risposta automatica
 // all'inserimento di un nuovo messaggio
-function autoReply() {
+function autoReply(wrapper) {
 
-  var wrapper = $(".wrapper_right_msg.visible");
+  // var wrapper = $(".wrapper_right_msg.visible");
   var date = new Date();
   var message = document.createElement("div");
   var messageContent = document.createElement("p");
@@ -84,6 +94,8 @@ function autoReply() {
   messageOptions1.append(messageOptions3);
 
   wrapper.append(message);
+
+  wrapper.animate({scrollTop: wrapper.prop("scrollHeight")}, 0);
 }
 
 
@@ -115,7 +127,9 @@ function search() {
 function menuDropdownOn() {
 
   var me = $(this);
-  me.parent().find(".message_options_menu").toggle();
+  me.parent().find(".message_options_menu").toggle("fast");
+  $(".message_options_menu").animate({scrollTop: $(".message_options_menu").prop("scrollHeight")}, 0);
+
 
   // $(".message_options").click(function(){
     //   $(".message_options_menu").toggle();
